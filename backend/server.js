@@ -28,8 +28,9 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Sirf local machine par chalate waqt hi server.listen() karein.
-// Vercel serverless mode mein khud request handle karta hai, is liye
-// wahan listen() ki zarurat nahi — bas "app" export honi chahiye.
 if (require.main === module) {
   app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+module.exports = app;
