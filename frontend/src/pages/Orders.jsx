@@ -17,7 +17,7 @@ function Orders() {
     }
 
     try {
-      const res = await axios.get("http://localhost:5000/api/orders/myorders", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/orders/myorders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOrders(res.data);
@@ -41,12 +41,11 @@ function Orders() {
       setCancellingId(orderId);
 
       const res = await axios.put(
-        `http://localhost:5000/api/orders/${orderId}/cancel`,
+        `${import.meta.env.VITE_API_URL}/orders/${orderId}/cancel`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Order list mein us order ka status update karein, bina dobara fetch kiye
       setOrders((prev) =>
         prev.map((o) => (o._id === orderId ? res.data : o))
       );

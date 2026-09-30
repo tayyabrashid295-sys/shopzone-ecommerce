@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import axios from "axios";
 
-
 function Checkout() {
   const { cart, totalPrice, clearCart } = useCart();
   const navigate = useNavigate();
@@ -46,7 +45,7 @@ function Checkout() {
     try {
       setLoading(true);
       await axios.post(
-        "http://localhost:5000/api/orders",
+        `${import.meta.env.VITE_API_URL}/orders`,
         { items, shippingInfo: form, totalPrice },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -78,7 +77,6 @@ function Checkout() {
               <input
                 name="fullName"
                 placeholder="e.g. Mian Tayyab"
-                
                 onChange={handleChange}
               />
             </div>
